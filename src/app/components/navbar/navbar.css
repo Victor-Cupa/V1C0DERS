@@ -1,0 +1,110 @@
+/* ==========================================================================
+   HEADER Y CONTENEDOR PRINCIPAL
+   ========================================================================== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 9%;
+    background: #0b0f19;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 2.5rem;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.logo span {
+    color: #00eeff;
+}
+
+/* ==========================================================================
+   NAVEGACIÓN Y ENLACES (ESTILO PILL UNIFICADO)
+   ========================================================================== */
+.navbar {
+    display: flex;
+    align-items: center;
+}
+
+/* 1. Base idéntica para TODOS los enlaces */
+.navbar a {
+    font-size: 1.7rem;
+    color: #fff;
+    margin-left: 1.5rem;
+    padding: 0.7rem 1.8rem;
+    border: 2px solid transparent; /* Todos invisibles por defecto */
+    border-radius: 0.8rem;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+}
+
+/* 2. Efecto Hover (pasar el mouse sin hacer clic) */
+.navbar a:hover {
+    color: #00eeff;
+    text-shadow: 0 0 1rem rgba(0, 238, 255, 0.4);
+}
+
+/* 3. EL ESTADO ACTIVO ÚNICO (El marco neón) */
+/* Cuando el usuario hace clic, aparece el borde, pero NO se rellena el fondo */
+.navbar a.active {
+    color: #00eeff !important;
+    border-color: #00eeff;
+    box-shadow: 0 0 1rem rgba(0, 238, 255, 0.2);
+    background: transparent !important; /* Forzamos a que no haya relleno sólido */
+}
+
+/* 4. Degradamos la clase .nav-cta a un simple espaciador */
+/* Ya no tiene colores ni bordes propios, solo lo usamos para separarlo un poco del resto */
+.nav-cta {
+    margin-left: 3.5rem !important; 
+}
+
+/* ==========================================================================
+   BOTÓN CALL TO ACTION (CONTÁCTAME)
+   ========================================================================== */
+/* El CTA siempre muestra el borde para destacar */
+.nav-cta {
+    border-color: #00eeff !important;
+    color: #00eeff !important;
+    font-weight: 600;
+    margin-left: 3.5rem !important; /* Lo separamos un poco más del resto */
+}
+
+/* Cuando el CTA tiene hover o está activo, se rellena de color sólido */
+.nav-cta:hover,
+.nav-cta.active {
+    background: #00eeff;
+    color: #0b0f19 !important;
+    box-shadow: 0 0 1.5rem #00eeff;
+}
+
+/* ==========================================================================
+   RESPONSIVIDAD Y MENÚ MÓVIL
+   ========================================================================== */
+/* Icono de menú oculto en escritorio */
+#menu-icon {
+    font-size: 3.6rem;
+    color: #fff;
+    display: none;
+    cursor: pointer;
+}
+
+/* Adaptación a pantallas pequeñas */
+@media (max-width: 768px) {
+    #menu-icon {
+        display: block;
+    }
+
+    .navbar {
+        display: none; /* Ocultamos la barra en móvil para futuro menú desplegable */
+    }
+}

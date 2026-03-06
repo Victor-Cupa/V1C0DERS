@@ -1,0 +1,153 @@
+/* ==========================================================================
+   SECCIÓN HERO (.home) - ARQUITECTURA FLUIDA
+   ========================================================================== */
+.home {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100vh; /* Cambio vital: Permite crecer si el contenido lo exige, pero asegura pantalla completa */
+    padding: 10rem 9% 2rem; /* Añadido 10rem arriba para que el navbar no te tape */
+    background-color: #0b0f19;
+    scroll-snap-align: start; /* El imán para el scroll por secciones */
+}
+
+/* --- CONTENIDO DE TEXTO --- */
+.home-content {
+    max-width: 60rem;
+}
+
+.home-content h3 {
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.home-content h3 span {
+    color: #00eeff;
+}
+
+.home-content h1 {
+    font-size: 5.6rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.home-content p {
+    font-size: 1.6rem;
+    margin: 2rem 0 4rem;
+    color: #ccc;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+}
+
+/* --- REDES SOCIALES Y BOTONES --- */
+.social-media {
+    display: flex; /* Añadido para mejor control en móviles */
+}
+
+.social-media a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 4rem;
+    background: transparent;
+    border: .2rem solid #00eeff;
+    border-radius: 50%;
+    font-size: 2rem;
+    color: #00eeff;
+    margin: 3rem 1.5rem 3rem 0;
+    transition: .5s ease;
+    text-decoration: none;
+}
+
+.social-media a:hover {
+    background: #00eeff;
+    color: #0b0f19;
+    box-shadow: 0 0 1rem #00eeff;
+}
+
+.btn {
+    display: inline-block;
+    padding: 1rem 2.8rem;
+    background: #00eeff;
+    border-radius: 4rem;
+    box-shadow: 0 0 1rem #00eeff;
+    font-size: 1.6rem;
+    color: #0b0f19;
+    font-weight: 600;
+    text-decoration: none;
+    transition: .5s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn:hover {
+    box-shadow: none;
+    background: #fff; /* Cambio a blanco para el efecto hover como en el formulario */
+}
+
+/* --- IMAGEN Y ANIMACIÓN --- */
+.home-img img {
+    width: 25vw;
+    min-width: 250px;
+    border-radius: 50%;
+    box-shadow: 0 0 2rem #00eeff;
+    animation: floatImage 4s ease-in-out infinite;
+    border: 5px solid rgba(0, 238, 255, 0.2);
+}
+
+@keyframes floatImage {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-2.4rem); }
+    100% { transform: translateY(0); }
+}
+
+/* ==========================================================================
+   EL MOTOR RESPONSIVO (TRANSFORMACIÓN A MÓVILES)
+   ========================================================================== */
+@media (max-width: 991px) {
+    .home {
+        flex-direction: column-reverse; /* Apila el texto abajo y la imagen arriba */
+        justify-content: center;
+        text-align: center;
+        gap: 4rem; /* Separa la imagen del texto */
+    }
+
+    .social-media {
+        justify-content: center; /* Centra los iconos de redes sociales */
+    }
+
+    .social-media a {
+        margin: 3rem 1.5rem; /* Ajusta los márgenes para que queden simétricos */
+    }
+
+    .home-content h1 {
+        font-size: 4.5rem; /* Achicamos un poco el título principal */
+    }
+}
+
+@media (max-width: 768px) {
+    .home {
+        padding-top: 12rem; /* Más espacio para menús de celular */
+    }
+
+    .home-img img {
+        width: 50vw; /* La imagen toma más porcentaje del ancho en celular */
+        min-width: 200px; /* Previene que se haga minúscula */
+    }
+
+    .home-content h1 {
+        font-size: 3.8rem;
+    }
+
+    .home-content h3 {
+        font-size: 2.5rem;
+    }
+
+    .home-content p {
+        font-size: 1.5rem;
+    }
+}

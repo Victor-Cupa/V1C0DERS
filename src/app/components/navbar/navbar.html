@@ -1,0 +1,21 @@
+<header class="header">
+    <a href="#" class="logo">Victor<span>Cupa</span></a>
+
+<nav class="navbar">
+    <a href="#inicio" 
+       (click)="setActive('inicio')" 
+       [class.active]="seccionActiva === 'inicio'">Inicio</a>
+
+    <a href="#sobre-mi" 
+       (click)="setActive('sobre-mi')" 
+       [class.active]="seccionActiva === 'sobre-mi'">Sobre Mí</a>
+
+    <a href="#portafolio" 
+       (click)="setActive('portafolio')" 
+       [class.active]="seccionActiva === 'portafolio'">Portafolio</a>
+
+    <a href="#contacto" 
+       (click)="setActive('contacto')"    
+       [class.active]="seccionActiva === 'contacto'">Contáctame</a>
+</nav>
+</header>

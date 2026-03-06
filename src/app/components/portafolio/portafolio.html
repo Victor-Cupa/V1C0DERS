@@ -1,0 +1,15 @@
+<section class="portfolio" id="portafolio">
+    <h2 class="heading">Mis <span>Proyectos</span></h2>
+
+    <div class="portfolio-container">
+        <div class="portfolio-box" *ngFor="let proyecto of misProyectos">
+            <img [src]="proyecto.imagen" [alt]="proyecto.titulo">
+            
+            <div class="portfolio-layer">
+                <h4>{{ proyecto.titulo }}</h4>
+                <p>{{ proyecto.descripcion }}</p>
+                <a [href]="proyecto.link" target="_blank"><i class='bx bx-link-external'></i></a>
+            </div>
+        </div>
+    </div>
+</section>

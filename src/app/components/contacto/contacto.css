@@ -1,0 +1,182 @@
+/* ==========================================================================
+   SECCIÓN: CONTACTO (COMPRESIÓN DINÁMICA Y CANDADO VERTICAL)
+   ========================================================================== */
+.contact {
+    /* Candado Arquitectónico: Prohíbe crecer más allá de la pantalla */
+    height: 100vh;
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow: hidden; /* Corta de raíz cualquier desbordamiento interno */
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    
+    /* TRUCO: Usamos 'vh' para que el relleno reaccione a la altura del monitor */
+    padding: 12vh 9% 2vh; 
+    background-color: #0b0f19;
+    scroll-snap-align: start;
+}
+
+/* Título de la sección */
+.contact .heading {
+    text-align: center;
+    font-size: 3.5rem; /* Reducido ligeramente */
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 3vh; /* Margen dinámico que se encoge en laptops */
+}
+
+.contact .heading span {
+    color: #00eeff;
+}
+
+/* Contenedor de las dos columnas */
+.contact-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    gap: 3rem; /* Espaciado reducido entre columnas */
+    width: 100%;
+    max-width: 110rem;
+    margin: 0 auto;
+}
+
+/* --- COLUMNA IZQUIERDA: TEXTO E INFO --- */
+.contact-info {
+    flex: 1;
+}
+
+.contact-info h3 {
+    font-size: 2.6rem;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 1vh; /* Margen dinámico */
+    line-height: 1.2;
+}
+
+.contact-info p {
+    font-size: 1.4rem;
+    color: #ccc;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.5;
+    margin-bottom: 3vh; /* Margen dinámico */
+}
+
+/* Iconos de contacto */
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1vh; 
+}
+
+.info-item i {
+    font-size: 2.2rem;
+    color: #00eeff;
+    margin-right: 1.5rem;
+}
+
+.info-item span, .email-link {
+    font-size: 1.5rem;
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- COLUMNA DERECHA: FORMULARIO --- */
+.contact-form {
+    flex: 1.2;
+    width: 100%;
+}
+
+.input-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh; /* Los inputs se acercan si la pantalla es baja */
+}
+
+/* Ajuste fino de los inputs */
+.input-stack input,
+.input-stack textarea {
+    width: 100%;
+    /* Relleno más compacto (0.8rem vertical) */
+    padding: 0.8rem 1.2rem; 
+    font-size: 1.4rem;
+    color: #fff;
+    background: #0f1523; 
+    border-radius: .8rem;
+    border: 1px solid rgba(0, 238, 255, 0.2);
+    font-family: 'Poppins', sans-serif;
+    transition: .3s ease;
+}
+
+/* Control maestro del área de texto */
+.input-stack textarea {
+    /* La altura máxima será el 15% de la pantalla, pero nunca menos de 8rem */
+    height: 15vh; 
+    min-height: 8rem;
+    max-height: 12rem;
+    resize: none; 
+}
+
+.input-stack input:focus,
+.input-stack textarea:focus {
+    border: 1px solid #00eeff;
+    outline: none;
+    box-shadow: 0 0 1rem rgba(0, 238, 255, 0.1);
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2vh; /* Margen dinámico */
+}
+
+.btn {
+    padding: 1rem 3.5rem;
+    background: #00eeff;
+    border-radius: 4rem;
+    box-shadow: 0 0 1rem rgba(0, 238, 255, 0.3);
+    font-size: 1.5rem;
+    color: #0b0f19;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: .5s ease;
+}
+
+.btn:hover {
+    background: #fff;
+    box-shadow: none;
+}
+
+/* ==========================================================================
+   ADAPTACIÓN A MÓVILES
+   ========================================================================== */
+@media (max-width: 991px) {
+    .contact-container {
+        flex-direction: column;
+        gap: 2vh;
+    }
+    .contact-info {
+        text-align: center;
+    }
+    .info-item {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact {
+        /* En celulares, permitimos que crezca si el teclado virtual aparece */
+        height: auto;
+        min-height: 100vh;
+        max-height: none;
+        overflow: visible;
+        padding-top: 15vh;
+    }
+    .button-container {
+        justify-content: center;
+    }
+}

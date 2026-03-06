@@ -1,0 +1,46 @@
+.floating-controls {
+    position: fixed; /* Esto es vital para que no se muevan al hacer scroll */
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column; /* Flecha arriba, WhatsApp abajo */
+    gap: 15px;
+    z-index: 9999; /* Asegura que estén por encima del footer y cualquier sección */
+}
+
+/* Estilos de la Flecha */
+.scroll-top {
+    width: 45px;
+    height: 45px;
+    background: #00eeff;
+    color: #0b0f19;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 2.2rem;
+    transition: .3s ease;
+    box-shadow: 0 0 15px rgba(0, 238, 255, 0.4);
+}
+
+/* Estilos de WhatsApp */
+.whatsapp-btn {
+    width: 55px;
+    height: 55px;
+    background: #25d366;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 3rem;
+    transition: .3s ease;
+    box-shadow: 0 0 15px rgba(37, 211, 102, 0.4);
+}
+
+/* Efectos Hover */
+.scroll-top:hover, .whatsapp-btn:hover {
+    transform: translateY(-5px) scale(1.1);
+}
