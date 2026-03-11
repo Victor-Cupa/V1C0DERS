@@ -1,73 +1,96 @@
+/* ==========================================================================
+   CONTENEDOR PRINCIPAL DEL FOOTER
+   ========================================================================== */
 .footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     padding: 3rem 9%;
-    background: #0f1523;
-    border-top: 1px solid rgba(0, 238, 255, 0.1);
+    background: var(--segundo-fondo, #0B132B); /* Fondo oscuro elegante */
+    border-top: 1px solid rgba(20, 255, 236, 0.15); /* Línea sutil cian */
+}
+
+/* ==========================================================================
+   LADO IZQUIERDO: TEXTOS Y TECNOLOGÍA
+   ========================================================================== */
+.footer-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem; /* Separación perfecta entre el nombre y el logo */
 }
 
 .footer-text p {
     font-size: 1.6rem;
-    color: #fff;
-    font-family: 'Orbitron', sans-serif;
+    color: var(--texto-principal, #fff);
+    font-family: var(--fuente-titulos, 'Orbitron', sans-serif);
+    letter-spacing: 0.1rem;
+    margin: 0;
 }
 
-.footer-text small {
-    font-size: 1.2rem;
-    color: #ccc;
-    font-family: 'Poppins', sans-serif;
+.tech-stack {
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+    color: var(--texto-secundario, #ccc);
+    font-family: var(--fuente-texto, 'Poppins', sans-serif);
 }
 
-/* Redes Sociales en el Footer */
+.angular-logo {
+    color: var(--color-principal, #00eeff);
+    font-size: 1.8rem;
+    margin: 0 0.5rem;
+    filter: drop-shadow(0 0 5px rgba(20, 255, 236, 0.6)); /* Brillo neón real */
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.tech-stack:hover .angular-logo {
+    transform: scale(1.2) rotate(5deg);
+    color: var(--color-secundario, #FF007F); /* Reacciona al mouse */
+}
+
+/* ==========================================================================
+   LADO DERECHO: REDES SOCIALES (CÍRCULOS NEÓN)
+   ========================================================================== */
+.footer-social {
+    display: flex;
+    gap: 1.5rem;
+}
+
 .footer-social a {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 4rem; /* Tamaño ajustado para centrar bien el ícono */
+    height: 4rem;
     background: transparent;
-    border: .2rem solid #00eeff;
+    border: 0.2rem solid var(--color-principal, #00eeff);
     border-radius: 50%;
-    font-size: 1.8rem;
-    color: #00eeff;
-    margin: 0 1rem;
-    transition: .5s ease;
+    font-size: 2.2rem; /* Tamaño del ícono de la red social */
+    color: var(--color-principal, #00eeff);
+    transition: 0.4s ease;
     text-decoration: none;
 }
 
 .footer-social a:hover {
-    background: #00eeff;
-    color: #0b0f19;
-    box-shadow: 0 0 1rem #00eeff;
+    background: var(--color-principal, #00eeff);
+    color: var(--fondo-oscuro, #0A0A0A);
+    box-shadow: 0 0 1.5rem rgba(20, 255, 236, 0.8);
+    transform: translateY(-0.5rem); /* Salto elegante hacia arriba */
 }
 
-.footer-iconTop a {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    padding: .8rem;
-    background: #00eeff;
-    border-radius: .8rem;
-    transition: .5s ease;
-}
-
-.footer-iconTop a:hover {
-    box-shadow: 0 0 1rem #00eeff;
-    background: #fff;
-}
-
-.footer-iconTop a i {
-    font-size: 2.4rem;
-    color: #0b0f19;
-}
-
-/* Responsividad para móviles */
+/* ==========================================================================
+   RESPONSIVIDAD (MÓVILES)
+   ========================================================================== */
 @media (max-width: 768px) {
     .footer {
         flex-direction: column;
         gap: 3rem;
         text-align: center;
+        justify-content: center;
+    }
+    
+    .footer-text {
+        align-items: center; /* Asegura que los textos se centren en celular */
     }
 }

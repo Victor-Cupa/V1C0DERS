@@ -1,0 +1,74 @@
+/* ==========================================================================
+   SECCIÓN ALIADOS / CLIENTES
+   ========================================================================== */
+.aliados {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    /* La altura perfecta ya viene heredada del 'section' en styles.css */
+}
+
+.aliados-subtitle {
+    font-size: 1.6rem;
+    color: var(--texto-secundario);
+    margin-bottom: 5rem;
+    max-width: 650px;
+    line-height: 1.6;
+}
+
+/* Sistema Grid que se adapta solo al tamaño de la pantalla */
+.aliados-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 2rem;
+}
+
+/* Efecto Glassmorphism estilo Jarvis */
+.aliado-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 1.5rem;
+    padding: 3.5rem 2rem;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Interacción Hover (Iluminación Neón) */
+.aliado-card:hover {
+    transform: translateY(-1rem);
+    border-color: var(--color-principal);
+    box-shadow: 0 1rem 3rem rgba(20, 255, 236, 0.15);
+}
+
+.aliado-icon {
+    font-size: 5rem;
+    color: var(--color-principal);
+    margin-bottom: 1rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.aliado-card:hover .aliado-icon {
+    color: var(--color-secundario); /* Cambia a color fucsia al hacer hover */
+    transform: scale(1.15) rotate(5deg);
+}
+
+.aliado-card h3 {
+    font-family: var(--fuente-titulos);
+    font-size: 2rem;
+    color: var(--texto-principal);
+    letter-spacing: 0.1rem;
+}
+
+.aliado-card p {
+    font-size: 1.4rem;
+    color: var(--texto-secundario);
+    line-height: 1.6;
+}

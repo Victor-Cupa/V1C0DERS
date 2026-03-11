@@ -9,13 +9,14 @@
         <div class="octagon-container">
         <div class="octagon-border">
             <video 
+                #videoPlayer
                 autoplay 
                 loop 
                 muted 
                 playsinline 
+                [muted]="true"
                 class="octagon-image">
-                <source src="/victorCupa.mp4" type="video/mp4">
-                Tu navegador no soporta videos.
+                <source src="assets/victorCupa.mp4" type="video/mp4">
             </video>
             
             <div class="scanline-effect"></div>
