@@ -10,7 +10,7 @@ import { Aliados } from './components/aliados/aliados';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [Navbar, Hero, About, Contacto, Footer, Portafolio, Aliados],
+  imports: [Navbar, Hero, About, Contacto, Footer, Portafolio, Aliados,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

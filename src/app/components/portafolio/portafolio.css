@@ -1,103 +1,233 @@
-.portfolio {
-    background: #0f1523; /* Fondo alterno para resaltar sobre el Hero/Contacto */
-    padding: 10rem 9%;
-}
-
-.heading {
-    text-align: center;
-    font-size: 4.5rem;
-    margin-bottom: 5rem;
-    color: #fff;
-    font-family: 'Orbitron', sans-serif;
-}
-
-.heading span {
-    color: #00eeff;
-}
-
-.portfolio-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas iguales */
-    align-items: center;
-    gap: 2.5rem;
-}
-
-.portfolio-box {
-    position: relative;
-    border-radius: 2rem;
-    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
-    overflow: hidden;
+/* ==========================================================================
+   MINI STACK TECNOLÓGICO EN PROYECTOS
+   ========================================================================== */
+.proyecto-tech-stack {
     display: flex;
-    border: 1px solid rgba(0, 238, 255, 0.1);
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin: 1.5rem 0; /* Espacio entre la descripción y los botones */
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Una línea sutil para separar */
 }
 
-.portfolio-box img {
+.mini-tech-icon {
+    width: 24px;  /* Pequeños y discretos */
+    height: 24px;
+    object-fit: contain;
+    opacity: 0.7; /* Ligeramente apagados para no robar protagonismo a la imagen del proyecto */
+    transition: all 0.3s ease;
+    cursor: help; /* Indica al usuario que puede poner el mouse encima para leer el Tooltip */
+}
+
+/* Efecto al pasar el mouse por un logo específico */
+.mini-tech-icon:hover {
+    opacity: 1; /* A todo color */
+    transform: translateY(-3px) scale(1.1);
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+}
+/* ==========================================================================
+   CONTENEDOR PRINCIPAL
+   ========================================================================== */
+.portafolio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     width: 100%;
-    transition: .5s ease;
+    padding: 6rem 9%;
 }
 
-.portfolio-box:hover img {
-    transform: scale(1.1);
+.portafolio-subtitle {
+    font-size: 1.6rem;
+    color: var(--texto-secundario);
+    margin-bottom: 4rem;
+    max-width: 650px;
+    line-height: 1.6;
 }
 
-.portfolio-layer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+/* ==========================================================================
+   LA CUADRÍCULA (GRID)
+   ========================================================================== */
+.proyectos-grid {
+    display: grid;
+    /* Crea columnas automáticas de mínimo 320px */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 3rem;
+    width: 100%;
+    max-width: 1200px;
+}
+
+/* ==========================================================================
+   TARJETAS 3D FLIP PARA PROYECTOS
+   ========================================================================== */
+.proyecto-card {
+    height: 420px; /* Altura fija para que la cuadrícula sea perfecta */
+    perspective: 1000px; 
+    background: transparent; 
+}
+
+.card-inner {
+    position: relative;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, .1), #00eeff);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.proyecto-card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Glassmorphism para ambas caras */
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 1.5rem;
+    overflow: hidden;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    text-align: center;
-    padding: 0 4rem;
-    transform: translateY(100%);
-    transition: .5s ease;
+    
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-.portfolio-box:hover .portfolio-layer {
-    transform: translateY(0);
+/* ==========================================================================
+   CARA FRONTAL
+   ========================================================================== */
+.card-front {
+    z-index: 2;
 }
 
-.portfolio-layer h4 {
-    font-size: 2.5rem;
-    color: #0b0f19;
-    font-family: 'Orbitron', sans-serif;
+.proyecto-img-container {
+    width: 100%;
+    height: 220px;
+    background: var(--segundo-fondo);
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.portfolio-layer p {
-    font-size: 1.4rem;
-    margin: .3rem 0 1rem;
-    color: #0b0f19;
-    font-weight: 600;
+.proyecto-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* A diferencia de los logos, las capturas de web deben cubrir todo */
+    transition: transform 0.5s ease;
 }
 
-.portfolio-layer a {
-    display: inline-flex;
+.proyecto-info-front {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.proyecto-info-front h3 {
+    font-family: var(--fuente-titulos);
+    font-size: 1.8rem;
+    color: var(--texto-principal);
+    margin-bottom: 1.5rem;
+}
+
+/* LOS MINI-LOGOS */
+.proyecto-tech-stack {
+    display: flex;
+    gap: 1.5rem;
     justify-content: center;
     align-items: center;
-    width: 4rem;
-    height: 4rem;
-    background: #fff;
-    border-radius: 50%;
 }
 
-.portfolio-layer a i {
-    font-size: 2rem;
-    color: #0b0f19;
+.mini-tech-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2));
 }
 
-/* Responsividad */
-@media (max-width: 991px) {
-    .portfolio-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
+/* ==========================================================================
+   CARA TRASERA
+   ========================================================================== */
+.card-back {
+    transform: rotateY(180deg);
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 2rem;
+    text-align: center;
+    background: rgba(11, 19, 43, 0.95); /* Fondo oscuro para que la lectura sea fácil */
 }
 
-@media (max-width: 617px) {
-    .portfolio-container {
-        grid-template-columns: 1fr;
-    }
+.card-back h3 {
+    font-family: var(--fuente-titulos);
+    font-size: 1.8rem;
+    color: var(--color-principal);
+    margin-bottom: 2rem;
+}
+
+.proyecto-desc {
+    font-size: 1.4rem;
+    color: var(--texto-secundario);
+    line-height: 1.6;
+    margin-bottom: 3rem;
+}
+
+/* BOTONES DE ACCIÓN */
+.proyecto-links {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.btn-outline, .btn-solid {
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn-outline {
+    border: 1px solid var(--color-principal);
+    color: var(--color-principal);
+    background: transparent;
+}
+
+.btn-outline:hover {
+    background: var(--color-principal);
+    color: var(--fondo-oscuro);
+    box-shadow: 0 0 15px var(--color-principal);
+}
+
+.btn-solid {
+    background: var(--color-principal);
+    color: var(--fondo-oscuro);
+    border: 1px solid var(--color-principal);
+}
+
+.btn-solid:hover {
+    background: transparent;
+    color: var(--color-principal);
+    box-shadow: 0 0 15px var(--color-principal);
+}
+
+/* ==========================================================================
+   EFECTOS HOVER GLOBALES
+   ========================================================================== */
+.proyecto-card:hover .card-front,
+.proyecto-card:hover .card-back {
+    border-color: var(--color-principal);
+    box-shadow: 0 1rem 3rem rgba(20, 255, 236, 0.15);
+}
+
+.proyecto-card:hover .proyecto-img {
+    transform: scale(1.1); /* Ligero zoom a la imagen de fondo mientras gira */
 }

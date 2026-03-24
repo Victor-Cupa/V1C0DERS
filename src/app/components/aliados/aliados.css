@@ -1,74 +1,242 @@
 /* ==========================================================================
-   SECCIÓN ALIADOS / CLIENTES
+   CONTENEDOR PRINCIPAL Y ENVOLTORIO
    ========================================================================== */
 .aliados {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    /* La altura perfecta ya viene heredada del 'section' en styles.css */
+    width: 100%;
 }
 
 .aliados-subtitle {
     font-size: 1.6rem;
     color: var(--texto-secundario);
-    margin-bottom: 5rem;
+    margin-bottom: 4rem;
     max-width: 650px;
     line-height: 1.6;
 }
 
-/* Sistema Grid que se adapta solo al tamaño de la pantalla */
-.aliados-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 3rem;
+.carousel-wrapper {
+    position: relative;
     width: 100%;
-    max-width: 1200px;
-    padding: 0 2rem;
+    max-width: 996px; /* Ancho exacto para 3 tarjetas */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
 }
 
-/* Efecto Glassmorphism estilo Jarvis */
+/* ==========================================================================
+   INDICADORES Y CARRUSEL NATIVO
+   ========================================================================== */
+.carousel-indicators {
+    display: flex;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+    z-index: 10;
+}
+
+.dot {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    border: 2px solid var(--color-principal);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: var(--color-principal);
+    box-shadow: 0 0 10px var(--color-principal);
+    transform: scale(1.3);
+}
+
+.carousel-aliados {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem; 
+    width: 100%;
+    padding: 2rem 0; 
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.carousel-aliados::-webkit-scrollbar {
+    display: none;
+}
+
+/* ==========================================================================
+   FLECHAS DE NAVEGACIÓN (Diseño Neón sin Círculo)
+   ========================================================================== */
+.nav-btn {
+    position: absolute;
+    top: 55%; 
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    padding: 1rem;
+    color: var(--color-principal);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.nav-btn i {
+    font-size: 6rem; 
+    filter: drop-shadow(0 0 5px rgba(20, 255, 236, 0.6));
+}
+
+.nav-btn:hover {
+    color: var(--color-principal);
+    filter: drop-shadow(0 0 15px var(--color-principal));
+    transform: translateY(-50%) scale(1.1); 
+}
+
+.left-btn { left: -100px; }
+.right-btn { right: -100px; }
+
+/* ==========================================================================
+   TARJETAS 3D FLIP (La Magia)
+   ========================================================================== */
 .aliado-card {
+    flex: 0 0 auto; 
+    width: 300px; 
+    height: 380px; /* Altura fija para el giro */
+    scroll-snap-align: center; 
+    perspective: 1000px; /* Profundidad 3D */
+    background: transparent; /* El contenedor ya no tiene fondo */
+}
+
+/* El elemento que realmente gira */
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+/* Efecto al pasar el mouse */
+.aliado-card:hover .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Estilos compartidos por el Frente y el Revés (Aquí va el Glassmorphism) */
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    
+    /* El cristal ahora vive en las caras */
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    border-radius: 1.5rem;
-    padding: 3.5rem 2rem;
-    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* ==========================================================================
+   CARA FRONTAL (Logo y Nombre)
+   ========================================================================== */
+.card-front {
+    z-index: 2;
+}
+
+.aliado-image-container {
+    width: 100%;
+    height: 180px; 
+    background: var(--segundo-fondo); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.aliado-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    padding: 1.5rem; 
+}
+
+.aliado-content {
+    padding: 2.5rem 2rem; 
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    flex: 1; 
+}
+
+.aliado-content h3 {
+    font-family: var(--fuente-titulos);
+    font-size: 1.8rem;
+    color: var(--texto-principal);
+    margin: 0;
+}
+
+/* ==========================================================================
+   CARA TRASERA (Slogan / Descripción)
+   ========================================================================== */
+.card-back {
+    transform: rotateY(180deg); /* Arranca de espaldas */
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.card-back-content {
+    display: flex;
+    flex-direction: column;
     gap: 1.5rem;
 }
 
-/* Interacción Hover (Iluminación Neón) */
-.aliado-card:hover {
-    transform: translateY(-1rem);
+.card-back h4 {
+    font-family: var(--fuente-titulos);
+    font-size: 1.6rem;
+    color: var(--color-principal);
+    margin: 0;
+}
+
+.card-back p {
+    font-size: 1.3rem;
+    color: var(--texto-secundario);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Brillo al girar la tarjeta */
+.aliado-card:hover .card-front,
+.aliado-card:hover .card-back {
     border-color: var(--color-principal);
     box-shadow: 0 1rem 3rem rgba(20, 255, 236, 0.15);
 }
 
-.aliado-icon {
-    font-size: 5rem;
-    color: var(--color-principal);
-    margin-bottom: 1rem;
-    transition: color 0.3s ease, transform 0.3s ease;
+/* ==========================================================================
+   RESPONSIVIDAD
+   ========================================================================== */
+@media (max-width: 1150px) {
+    .left-btn { left: 0; }
+    .right-btn { right: 0; }
+    .carousel-wrapper { max-width: 648px; }
 }
 
-.aliado-card:hover .aliado-icon {
-    color: var(--color-secundario); /* Cambia a color fucsia al hacer hover */
-    transform: scale(1.15) rotate(5deg);
-}
-
-.aliado-card h3 {
-    font-family: var(--fuente-titulos);
-    font-size: 2rem;
-    color: var(--texto-principal);
-    letter-spacing: 0.1rem;
-}
-
-.aliado-card p {
-    font-size: 1.4rem;
-    color: var(--texto-secundario);
-    line-height: 1.6;
+@media (max-width: 768px) {
+    .carousel-wrapper { max-width: 300px; }
+    .nav-btn { display: none; }
 }

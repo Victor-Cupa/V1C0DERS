@@ -1,0 +1,7 @@
+<svg viewBox="0 0 100 125" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path stroke="#00eeff" stroke-width="2.5" d="M50 10 C30 10, 15 25, 15 45 C15 60, 25 70, 35 75 L35 85 L65 85 L65 75 C75 70, 85 60, 85 45 C85 25, 70 10, 50 10 Z"/>
+  <path stroke="#00eeff" stroke-width="1.5" stroke-linecap="round" opacity="0.7" d="M35 85 Q 50 70, 65 85 M40 80 Q 50 65, 60 80 M45 75 Q 50 60, 55 75"/>
+  <path stroke="#00eeff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" d="M42 35 L33 45 L42 55 M58 35 L67 45 L58 55 M53 30 L47 60"/>
+  <text x="50" y="93" text-anchor="middle" stroke="#e0e0e0" fill="#e0e0e0" font-family="'Orbitron', sans-serif" font-size="7" font-weight="bold">CUPA</text>
+  <path stroke="#e0e0e0" stroke-width="2" d="M35 85 L65 85 L62 95 L38 95 Z M38 95 L62 95 L60 100 L40 100 Z"/>
+</svg>
