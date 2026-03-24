@@ -1,0 +1,33 @@
+<div class="modal-overlay" (click)="cerrarModal()">
+    
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        
+        <div class="modal-header">
+            <h3>Mi Archivo de <span>Proyectos</span></h3>
+            <button class="close-btn" (click)="cerrarModal()">
+                <i class='bx bx-x'></i> </button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="proyectos-modal-grid">
+                @for (proyecto of todosLosProyectos; track proyecto.id) {
+                    <div class="proyecto-modal-card">
+                        <div class="proyecto-modal-img">
+                            <img [src]="proyecto.imagenUrl" [alt]="proyecto.titulo">
+                        </div>
+                        <div class="proyecto-modal-info">
+                            <h4>{{ proyecto.titulo }}</h4>
+                            <p>{{ proyecto.descripcion }}</p>
+                            <div class="mini-tech-stack">
+                                @for (tech of proyecto.tecnologias; track tech.nombre) {
+                                    <img [src]="tech.iconoUrl" [alt]="tech.nombre" class="mini-icon-color">
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        
+    </div>
+</div>

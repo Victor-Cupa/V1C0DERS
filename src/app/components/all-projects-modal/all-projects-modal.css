@@ -1,0 +1,173 @@
+/* ==========================================================================
+   MODAL DE PROYECTOS (Aesthetic Jarvis)
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Fondo oscuro profundo */
+    backdrop-filter: blur(5px); /* Desenfoque sutil */
+    z-index: 2000; /* Siempre encima */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 1300px;
+    height: 80vh;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    
+    /* Efecto Glassmorphism Neón */
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid var(--color-principal); /* Borde neón cian */
+    box-shadow: 0 0 30px rgba(20, 255, 236, 0.3); 
+    backdrop-filter: blur(15px);
+}
+
+/* ==========================================================================
+   HEADER Y CUERPO
+   ========================================================================== */
+.modal-header {
+    padding: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.modal-header h3 {
+    font-family: var(--fuente-titulos);
+    font-size: 2rem;
+    color: var(--texto-principal);
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-principal);
+    font-size: 3rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #ff3366; /* Un rojo neón al hover para cerrar */
+    transform: rotate(90deg);
+}
+
+/* El cuerpo tiene scroll propio */
+.modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 3rem;
+    /* Estilizamos la barra de scroll para que combine */
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-principal) transparent;
+}
+
+/* ==========================================================================
+   CUADRÍCULA INTERNA (Grid)
+   ========================================================================== */
+.proyectos-modal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+}
+
+/* Reutilizamos el estilo de tarjeta holográfica */
+.proyecto-modal-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Asegúrate de reutilizar tus mini-iconos contextuales coloridos */
+.mini-icon-color {
+    width: 20px; /* Mini */
+    height: 20px;
+}
+/* ==========================================================================
+   ESTILOS INTERNOS DE LA TARJETA DEL MODAL
+   ========================================================================== */
+
+/* 1. Contenedor de la Imagen */
+.proyecto-modal-img {
+    width: 100%;
+    height: 180px; /* Altura estricta para que todas las tarjetas sean uniformes */
+    background: var(--segundo-fondo);
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 2. La Imagen en sí */
+.proyecto-modal-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* CRÍTICO: Recorta la imagen proporcionalmente sin deformarla */
+    transition: transform 0.4s ease;
+}
+
+/* Efecto hover suave en la imagen */
+.proyecto-modal-card:hover .proyecto-modal-img img {
+    transform: scale(1.05);
+}
+
+/* 3. Contenedor de la Información (Textos y Logos) */
+.proyecto-modal-info {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1; /* Obliga a la tarjeta a estirarse si hay menos texto */
+}
+
+/* Título del proyecto en el modal */
+.proyecto-modal-info h4 {
+    font-family: var(--fuente-titulos);
+    font-size: 1.6rem;
+    color: var(--texto-principal);
+    margin: 0;
+}
+
+/* Descripción */
+.proyecto-modal-info p {
+    font-size: 1.3rem;
+    color: var(--texto-secundario);
+    line-height: 1.5;
+    margin: 0;
+    margin-bottom: 1rem; /* Separa el texto de los logos */
+    flex: 1; /* Empuja los logos siempre hacia abajo */
+}
+
+/* 4. Mini Stack Tecnológico en el Modal */
+.mini-tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Línea separadora sutil */
+}
+
+.mini-icon-color {
+    width: 24px; /* Tamaño controlado */
+    height: 24px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2));
+    transition: transform 0.3s ease;
+}
+
+.mini-icon-color:hover {
+    transform: translateY(-3px) scale(1.1);
+}

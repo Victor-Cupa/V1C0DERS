@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AllProjectsModalComponent } from '../all-projects-modal/all-projects-modal';
+
 
 export interface MiniTech {
   nombre: string;
@@ -18,12 +20,12 @@ export interface Proyecto {
 @Component({
   selector: 'app-portafolio',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AllProjectsModalComponent],
   templateUrl: './portafolio.html',
   styleUrls: ['./portafolio.css']
 })
 export class Portafolio {
-
+  modalAbierto: boolean = false;
   listaProyectos: Proyecto[] = [
     {
       id: 1,
@@ -64,7 +66,33 @@ export class Portafolio {
     },
       {
       id: 4,
-      titulo: 'Running Skate',
+      titulo: 'Analizador de documentos',
+      descripcion: 'Escuela de formacion de patinaje Madrid cundinamarca.',
+      imagenUrl: 'assets/running.jpg',
+      tecnologias: [
+        { nombre: 'Angular', iconoUrl: 'assets/logos/angular.svg' },
+        { nombre: 'Python', iconoUrl: 'assets/logos/python.svg' }
+      ],
+
+      linkProyecto: '#'
+    },
+
+      {
+      id: 5,
+      titulo: 'calcular algo',
+      descripcion: 'Escuela de formacion de patinaje Madrid cundinamarca.',
+      imagenUrl: 'assets/running.jpg',
+      tecnologias: [
+        { nombre: 'Angular', iconoUrl: 'assets/logos/angular.svg' },
+        { nombre: 'Python', iconoUrl: 'assets/logos/python.svg' }
+      ],
+
+      linkProyecto: '#'
+    },
+
+      {
+      id: 6,
+      titulo: 'proyecto en ejecucion',
       descripcion: 'Escuela de formacion de patinaje Madrid cundinamarca.',
       imagenUrl: 'assets/running.jpg',
       tecnologias: [
@@ -75,4 +103,11 @@ export class Portafolio {
       linkProyecto: '#'
     }
   ];
+  abrirModalProyectos() {
+    this.modalAbierto = true;
+  }
+
+  cerrarModalProyectos() {
+    this.modalAbierto = false;
+  }
 }

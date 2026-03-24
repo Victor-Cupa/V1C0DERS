@@ -231,3 +231,43 @@
 .proyecto-card:hover .proyecto-img {
     transform: scale(1.1); /* Ligero zoom a la imagen de fondo mientras gira */
 }
+/* ==========================================================================
+   BOTÓN "VER MÁS PROYECTOS" (Estilo Neón Jarvis)
+   ========================================================================== */
+.btn-ver-mas-neon {
+    margin-top: 4rem; /* Le da espacio para respirar debajo de la cuadrícula */
+    padding: 1.2rem 3rem;
+    background: transparent;
+    color: var(--color-principal);
+    border: 2px solid var(--color-principal);
+    border-radius: 0.8rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    font-family: var(--fuente-titulos);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto Hover: Se llena de cian y el texto pasa a oscuro */
+.btn-ver-mas-neon:hover {
+    background: var(--color-principal);
+    color: var(--fondo-oscuro);
+    box-shadow: 0 0 20px rgba(20, 255, 236, 0.4);
+    transform: translateY(-3px);
+}
+
+/* Ajuste del icono dentro del botón */
+.btn-ver-mas-neon i {
+    font-size: 2.2rem;
+    transition: transform 0.3s ease;
+}
+
+/* El icono gira al pasar el mouse para darle dinamismo */
+.btn-ver-mas-neon:hover i {
+    transform: rotate(90deg);
+}

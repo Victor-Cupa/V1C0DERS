@@ -3,7 +3,7 @@
     <p class="portafolio-subtitle">Desarrollos escalables construidos con las mejores prácticas de la industria.</p>
     
     <div class="proyectos-grid">
-        @for (proyecto of listaProyectos; track proyecto.id) {
+        @for (proyecto of listaProyectos.slice(0, 3); track proyecto.id) {
             
             <div class="proyecto-card">
                 <div class="card-inner">
@@ -38,4 +38,16 @@
             </div>
             }
     </div>
+
+    <button class="btn-ver-mas-neon" (click)="abrirModalProyectos()">
+        <span>Ver Más Proyectos</span>
+        <i class='bx bx-plus'></i>
+    </button>
 </section>
+
+@if (modalAbierto) {
+    <app-all-projects-modal 
+        [todosLosProyectos]="listaProyectos.slice(3)" 
+        (cerrarModalEvent)="cerrarModalProyectos()">
+    </app-all-projects-modal>
+}
