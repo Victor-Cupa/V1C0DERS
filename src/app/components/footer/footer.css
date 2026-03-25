@@ -6,7 +6,7 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    padding: 3rem 9%;
+    padding: 1rem 9%;
     background: var(--segundo-fondo, #0B132B); /* Fondo oscuro elegante */
     border-top: 1px solid rgba(20, 255, 236, 0.15); /* Línea sutil cian */
 }
