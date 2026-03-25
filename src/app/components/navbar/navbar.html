@@ -1,25 +1,25 @@
 <header class="header">
-    <a href="#" class="logo">Victor<span>Cupa</span></a>
+    <a [routerLink]="['/inicio']" fragment="inicio" class="logo">Victor<span>Cupa</span></a>
 
-<nav class="navbar">
-    <a href="#inicio" 
-       (click)="setActive('inicio')" 
-       [class.active]="seccionActiva === 'inicio'">Inicio</a>
+    <nav class="navbar">
+        <a [routerLink]="['/inicio']" 
+           fragment="inicio" 
+           [class.active]="seccionActiva === 'inicio'">Inicio</a>
 
-    <a href="#sobre-mi" 
-       (click)="setActive('sobre-mi')" 
-       [class.active]="seccionActiva === 'sobre-mi'">Sobre Mí</a>
+        <a [routerLink]="['/sobre-mi']" 
+           fragment="sobre-mi" 
+           [class.active]="seccionActiva === 'sobre-mi'">Sobre Mí</a>
 
-    <a href="#portafolio" 
-       (click)="setActive('portafolio')" 
-       [class.active]="seccionActiva === 'portafolio'">Portafolio</a>
+        <a [routerLink]="['/portafolio']" 
+           fragment="portafolio" 
+           [class.active]="seccionActiva === 'portafolio'">Portafolio</a>
 
-    <a href="#contacto" 
-       (click)="setActive('contacto')"    
-       [class.active]="seccionActiva === 'contacto'">Contáctame</a>
+        <a [routerLink]="['/aliados']" 
+           fragment="aliados" 
+           [class.active]="seccionActiva === 'aliados'">Aliados</a>
 
-      <a href="#aliados" 
-       (click)="setActive('aliados')"    
-       [class.active]="seccionActiva === 'aliados'">Aliados</a>
-</nav>
+        <a [routerLink]="['/contacto']" 
+           fragment="contacto" 
+           [class.active]="seccionActiva === 'contacto'">Contáctame</a>
+    </nav>
 </header>

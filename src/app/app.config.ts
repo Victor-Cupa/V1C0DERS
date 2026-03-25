@@ -1,11 +1,18 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
+// 1. Asegúrate de incluir withInMemoryScrolling en este import
+import { provideRouter, withInMemoryScrolling } from '@angular/router'; 
 
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes)
+    provideRouter(
+      routes, 
+      withInMemoryScrolling({
+        anchorScrolling: 'enabled',
+        scrollPositionRestoration: 'enabled'
+      })
+    )
   ]
 };

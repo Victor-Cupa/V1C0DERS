@@ -1,16 +1,21 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet, RouterLink } from '@angular/router';
 import { Navbar } from './components/navbar/navbar';
-import { Hero } from './components/hero/hero';
-import { About } from './components/about/about';
-import { Contacto } from './components/contacto/contacto';
 import { Footer } from './components/footer/footer';
-import { Portafolio } from './components/portafolio/portafolio';
-import { Aliados } from './components/aliados/aliados';
+
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [Navbar, Hero, About, Contacto, Footer, Portafolio, Aliados,],
+  imports: [
+    CommonModule, 
+    RouterOutlet, 
+    RouterLink,
+    Navbar,
+    Footer
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
