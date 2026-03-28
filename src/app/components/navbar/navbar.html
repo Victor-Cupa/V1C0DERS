@@ -1,25 +1,39 @@
 <header class="header">
-    <a [routerLink]="['/inicio']" fragment="inicio" class="logo">Victor<span>Cupa</span></a>
+    <a [routerLink]="['/inicio']" fragment="inicio" class="logo" (click)="closeMenu()">
+        Victor<span>Cupa</span>
+    </a>
 
-    <nav class="navbar">
+    <button class="menu-icon" (click)="toggleMenu()" [class.open]="isMenuOpen" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav class="navbar" [class.open]="isMenuOpen">
         <a [routerLink]="['/inicio']" 
            fragment="inicio" 
-           [class.active]="seccionActiva === 'inicio'">Inicio</a>
+           [class.active]="seccionActiva === 'inicio'"
+           (click)="closeMenu()">Inicio</a>
 
         <a [routerLink]="['/sobre-mi']" 
            fragment="sobre-mi" 
-           [class.active]="seccionActiva === 'sobre-mi'">Sobre Mí</a>
+           [class.active]="seccionActiva === 'sobre-mi'"
+           (click)="closeMenu()">Sobre Mí</a>
 
         <a [routerLink]="['/portafolio']" 
            fragment="portafolio" 
-           [class.active]="seccionActiva === 'portafolio'">Portafolio</a>
+           [class.active]="seccionActiva === 'portafolio'"
+           (click)="closeMenu()">Portafolio</a>
 
         <a [routerLink]="['/aliados']" 
            fragment="aliados" 
-           [class.active]="seccionActiva === 'aliados'">Aliados</a>
+           [class.active]="seccionActiva === 'aliados'"
+           (click)="closeMenu()">Aliados</a>
 
         <a [routerLink]="['/contacto']" 
            fragment="contacto" 
-           [class.active]="seccionActiva === 'contacto'">Contáctame</a>
+           class="nav-cta"
+           [class.active]="seccionActiva === 'contacto'"
+           (click)="closeMenu()">Contáctame</a>
     </nav>
 </header>

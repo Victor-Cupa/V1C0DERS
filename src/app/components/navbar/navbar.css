@@ -1,25 +1,31 @@
 /* ==========================================================================
-   HEADER Y CONTENEDOR PRINCIPAL
+   HEADER Y LOGOTIPO
    ========================================================================== */
 .header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 1rem 9%;
+    padding: 1rem 5%;
     background: #0b0f19;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 100;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    padding-top: calc(1rem + env(safe-area-inset-top));
+    padding-left: calc(5% + env(safe-area-inset-left));
+    padding-right: calc(5% + env(safe-area-inset-right));
 }
 
 .logo {
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: #fff;
     text-decoration: none;
     font-weight: 700;
     font-family: 'Orbitron', sans-serif;
+    z-index: 1001;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .logo span {
@@ -27,84 +33,134 @@
 }
 
 /* ==========================================================================
-   NAVEGACIÓN Y ENLACES (ESTILO PILL UNIFICADO)
+   MENÚ MÓVIL (HAMBURGUESA)
+   ========================================================================== */
+.menu-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 44px;
+    height: 44px;
+    padding: 13px 9px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.menu-icon span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* --- ANIMACIÓN DE HAMBURGUESA A "X" (DEBE ESTAR FUERA DE MEDIA QUERIES) --- */
+.menu-icon.open span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.menu-icon.open span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.menu-icon.open span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   NAVEGACIÓN (SISTEMA UNIFICADO)
    ========================================================================== */
 .navbar {
     display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    height: 100vh;
+    background: #0b0f19;
+    justify-content: center;
     align-items: center;
+    gap: 1.5rem;
+    transition: right 0.3s ease;
+    z-index: 999;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.5);
 }
 
-/* 1. Base idéntica para TODOS los enlaces */
+.navbar.open {
+    right: 0;
+}
+
 .navbar a {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     color: #fff;
-    margin-left: 1.5rem;
     padding: 0.7rem 1.8rem;
-    border: 2px solid transparent; /* Todos invisibles por defecto */
+    border: 2px solid transparent;
     border-radius: 0.8rem;
     text-decoration: none;
     font-family: 'Poppins', sans-serif;
     transition: all 0.3s ease;
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* 2. Efecto Hover (pasar el mouse sin hacer clic) */
-.navbar a:hover {
-    color: #00eeff;
-    text-shadow: 0 0 1rem rgba(0, 238, 255, 0.4);
-}
-
-/* 3. EL ESTADO ACTIVO ÚNICO (El marco neón) */
-/* Cuando el usuario hace clic, aparece el borde, pero NO se rellena el fondo */
+.navbar a:hover,
 .navbar a.active {
     color: #00eeff !important;
-    border-color: #00eeff;
-    box-shadow: 0 0 1rem rgba(0, 238, 255, 0.2);
-    background: transparent !important; /* Forzamos a que no haya relleno sólido */
-}
-
-/* 4. Degradamos la clase .nav-cta a un simple espaciador */
-/* Ya no tiene colores ni bordes propios, solo lo usamos para separarlo un poco del resto */
-.nav-cta {
-    margin-left: 3.5rem !important; 
-}
-
-/* ==========================================================================
-   BOTÓN CALL TO ACTION (CONTÁCTAME)
-   ========================================================================== */
-/* El CTA siempre muestra el borde para destacar */
-.nav-cta {
     border-color: #00eeff !important;
-    color: #00eeff !important;
-    font-weight: 600;
-    margin-left: 3.5rem !important; /* Lo separamos un poco más del resto */
-}
-
-/* Cuando el CTA tiene hover o está activo, se rellena de color sólido */
-.nav-cta:hover,
-.nav-cta.active {
-    background: #00eeff;
-    color: #0b0f19 !important;
-    box-shadow: 0 0 1.5rem #00eeff;
+    background: transparent !important; 
+    box-shadow: 0 0 1rem rgba(0, 238, 255, 0.4);
+    text-shadow: 0 0 0.5rem rgba(0, 238, 255, 0.2);
 }
 
 /* ==========================================================================
-   RESPONSIVIDAD Y MENÚ MÓVIL
+   CALL TO ACTION (CONTÁCTAME)
    ========================================================================== */
-/* Icono de menú oculto en escritorio */
-#menu-icon {
-    font-size: 3.6rem;
-    color: #fff;
-    display: none;
-    cursor: pointer;
+.navbar a.nav-cta {
+    font-weight: 600;
+    border-color: transparent; 
 }
 
-/* Adaptación a pantallas pequeñas */
-@media (max-width: 768px) {
-    #menu-icon {
-        display: block;
+/* ==========================================================================
+   MEDIA QUERIES (ESCRITORIO)
+   ========================================================================== */
+@media (min-width: 769px) {
+    .header {
+        padding: 1rem 9%;
+    }
+
+    .logo {
+        font-size: 2.5rem;
+    }
+
+    .menu-icon {
+        display: none;
     }
 
     .navbar {
-        display: none; /* Ocultamos la barra en móvil para futuro menú desplegable */
+        position: static;
+        width: auto;
+        height: auto;
+        flex-direction: row;
+        background: transparent;
+        box-shadow: none;
+        transition: none;
+        gap: 0;
+    }
+
+    .navbar a {
+        font-size: 1.7rem;
+        margin-left: 1.5rem;
+        width: auto;
+    }
+
+    .navbar a.nav-cta {
+        margin-left: 3.5rem !important;
+        border-color: transparent;
     }
 }

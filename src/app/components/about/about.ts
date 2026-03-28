@@ -1,51 +1,81 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, ElementRef, ViewChild, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import Typed from 'typed.js';
 
 @Component({
   selector: 'app-about',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './about.html',
   styleUrls: ['./about.css']
 })
-export class About implements AfterViewInit {
+export class About implements AfterViewInit, OnDestroy {
+  private platformId = inject(PLATFORM_ID);
   
-  // Regla de Arquitectura: Usamos ViewChild en lugar de document.querySelector
-  @ViewChild('textoDictado', { static: false }) textoDictado!: ElementRef;
-  isTyping: boolean = false; // Para controlar la animación de las ondas de audio
-  ngAfterViewInit(): void {
-    // Configuramos las opciones de la "IA"
-const options = {
-  strings: [
-    "Me especializo en transformar ideas en productos digitales fluidos, cuidando cada detalle del rendimiento y la estética. Mi objetivo es siempre el mismo: entregar herramientas robustas que simplifiquen procesos y aporten valor real desde el primer despliegue."
-    // Puedes añadir más frases aquí, separadas por coma, y las escribirá en secuencia
-  ],
-typeSpeed: 35,       
-  backSpeed: 0,        // Velocidad 0 = borrado instantáneo completo
-  backDelay: 2500,     
-  startDelay: 800,     
-  smartBackspace: false, // Fuerza a que borre toda la cadena de una vez
-  // EL FIX CRÍTICO PARA REPETIR:
-  loop:  true,      // ¡ACTÍVALO! Esto hará que la animación nunca se detenga
-  fadeOut: true,   // Opcional: Para un efecto de desaparición suave entre frases
-  fadeOutDelay: 100, // Opcional: Tiempo para el fade out antes de borrar
+  @ViewChild('textoDictado') textoDictado!: ElementRef;
+  @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
   
-  showCursor: true,
-  cursorChar: '|',
+  private typed: Typed | null = null;
   
-  // Opcional: Para sincronizar las ondas de audio
-  onTypingStarted: (self:any) => {
-    // Aquí podrías disparar un método para activar/animar tus ondas de audio
-    // console.log('El dictado de la IA ha comenzado');
-    this.isTyping = true; // Por ejemplo, podrías usar una variable para mostrar/ocultar las ondas
-  },
-  onStringTyped: (arrayPos:number, self:any) => {
-    // Podrías detener la animación de las ondas aquí brevemente
-    // console.log('La IA ha terminado de "hablar" esta frase');
-    this.isTyping = false; // Por ejemplo, podrías usar una variable para mostrar/ocultar las ondas
-  }
-};
+  // Definimos el texto en una propiedad para usarlo en ambos casos
+  readonly aboutDescription = "Me especializo en transformar ideas en productos digitales fluidos, cuidando cada detalle del rendimiento y la estética. Mi objetivo es entregar herramientas robustas que aporten valor real.";
 
-    // Instanciamos la librería apuntando a nuestro elemento seguro
-    new Typed(this.textoDictado.nativeElement, options);
+  ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.setupVideo();
+      
+      // --- NUEVA LÓGICA DE DETECCIÓN MÓVIL ---
+      const isMobile = window.innerWidth <= 991;
+      this.handleTextContent(isMobile);
+    }
+  }
+
+  private setupVideo(): void {
+    if (this.videoPlayer) {
+      const video = this.videoPlayer.nativeElement;
+      video.muted = true;
+      video.volume = 0;
+      
+      video.play().catch(err => {
+        console.warn("Autoplay bloqueado:", err);
+      });
+    }
+  }
+
+  // --- LÓGICA DE TEXTO FIJO VS ANIMADO ---
+  private handleTextContent(isMobile: boolean): void {
+    if (this.textoDictado && this.textoDictado.nativeElement) {
+      // Limpiamos el span siempre
+      this.textoDictado.nativeElement.innerHTML = '';
+      
+      if (isMobile) {
+        // En Móvil: Insertamos el texto directamente (estático)
+        this.textoDictado.nativeElement.innerText = this.aboutDescription;
+      } else {
+        // En Escritorio: Iniciamos Typed.js
+        this.initTypingEffect();
+      }
+    }
+  }
+
+  private initTypingEffect(): void {
+    // Si ya existe una instancia por navegación, la destruimos
+    if (this.typed) { this.typed.destroy(); }
+
+    const options = {
+      strings: [this.aboutDescription], // Usamos la propiedad compartida
+      typeSpeed: 40,
+      backSpeed: 0,
+      loop: true,
+      backDelay: 3000,
+      showCursor: true,
+      cursorChar: '|'
+    };
+
+    this.typed = new Typed(this.textoDictado.nativeElement, options);
+  }
+
+  ngOnDestroy(): void {
+    if (this.typed) { this.typed.destroy(); }
   }
 }

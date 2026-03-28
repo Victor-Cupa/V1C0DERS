@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, HostListener, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { AllProjectsModalComponent } from '../all-projects-modal/all-projects-modal';
-
 
 export interface MiniTech {
   nombre: string;
@@ -24,8 +23,11 @@ export interface Proyecto {
   templateUrl: './portafolio.html',
   styleUrls: ['./portafolio.css']
 })
-export class Portafolio {
+export class Portafolio implements OnInit {
+  private platformId = inject(PLATFORM_ID);
   modalAbierto: boolean = false;
+  isMobile: boolean = false;
+
   listaProyectos: Proyecto[] = [
     {
       id: 1,
@@ -37,7 +39,6 @@ export class Portafolio {
         { nombre: 'Python', iconoUrl: 'assets/logos/python.svg' },
         { nombre: 'PostgreSQL', iconoUrl: 'assets/logos/postgresql.svg' }
       ],
-
       linkProyecto: '#'
     },
     {
@@ -49,7 +50,6 @@ export class Portafolio {
         { nombre: 'Angular', iconoUrl: 'assets/logos/angular.svg' },
         { nombre: 'Node.js', iconoUrl: 'assets/logos/nodejs.svg' }
       ],
-
       linkProyecto: '#'
     },
     {
@@ -61,53 +61,69 @@ export class Portafolio {
         { nombre: 'Angular', iconoUrl: 'assets/logos/angular.svg' },
         { nombre: 'Python', iconoUrl: 'assets/logos/python.svg' }
       ],
-
       linkProyecto: '#'
     },
-      {
+    {
       id: 4,
       titulo: 'Analizador de documentos',
-      descripcion: 'Escuela de formacion de patinaje Madrid cundinamarca.',
+      descripcion: 'Escuela de formación de patinaje Madrid Cundinamarca.',
       imagenUrl: 'assets/running.jpg',
       tecnologias: [
         { nombre: 'Angular', iconoUrl: 'assets/logos/angular.svg' },
         { nombre: 'Python', iconoUrl: 'assets/logos/python.svg' }
       ],
-
       linkProyecto: '#'
     },
-
-      {
+    {
       id: 5,
-      titulo: 'calcular algo',
-      descripcion: 'Escuela de formacion de patinaje Madrid cundinamarca.',
+      titulo: 'Calcular Algo',
+      descripcion: 'Herramienta de procesamiento de datos para optimización de cálculos complejos.',
       imagenUrl: 'assets/running.jpg',
       tecnologias: [
         { nombre: 'Angular', iconoUrl: 'assets/logos/angular.svg' },
         { nombre: 'Python', iconoUrl: 'assets/logos/python.svg' }
       ],
-
       linkProyecto: '#'
     },
-
-      {
+    {
       id: 6,
-      titulo: 'proyecto en ejecucion',
-      descripcion: 'Escuela de formacion de patinaje Madrid cundinamarca.',
+      titulo: 'Proyecto en Ejecución',
+      descripcion: 'Módulo de gestión educativa en fase de despliegue.',
       imagenUrl: 'assets/running.jpg',
       tecnologias: [
         { nombre: 'Angular', iconoUrl: 'assets/logos/angular.svg' },
         { nombre: 'Python', iconoUrl: 'assets/logos/python.svg' }
       ],
-
       linkProyecto: '#'
     }
   ];
-  abrirModalProyectos() {
-    this.modalAbierto = true;
+
+  ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.checkScreenSize();
+    }
   }
 
-  cerrarModalProyectos() {
-    this.modalAbierto = false;
+  @HostListener('window:resize', [])
+  onResize() {
+    this.checkScreenSize();
   }
+
+  private checkScreenSize() {
+    this.isMobile = window.innerWidth <= 768;
+  }
+
+  // GETTERS DINÁMICOS: La clave de tu solicitud
+  get proyectosVisibles() {
+    // Si es móvil muestra solo 1, si es desktop muestra 3
+    return this.isMobile ? this.listaProyectos.slice(0, 1) : this.listaProyectos.slice(0, 3);
+  }
+
+  get proyectosParaModal() {
+    // Si es móvil manda del 2 en adelante al modal, si es desktop manda del 4 en adelante
+    return this.isMobile ? this.listaProyectos.slice(1) : this.listaProyectos.slice(3);
+  }
+
+  abrirModalProyectos() { this.modalAbierto = true; }
+  cerrarModalProyectos() { this.modalAbierto = false; }
 }

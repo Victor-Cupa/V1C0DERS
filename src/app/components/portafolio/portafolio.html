@@ -1,20 +1,18 @@
 <section class="portafolio" id="portafolio">
-    <h2>Mis <span>Proyectos</span></h2>
+    <h2 class="heading">Mis <span>Proyectos</span></h2>
     <p class="portafolio-subtitle">Desarrollos escalables construidos con las mejores prácticas de la industria.</p>
     
     <div class="proyectos-grid">
-        @for (proyecto of listaProyectos.slice(0, 3); track proyecto.id) {
-            
+        @for (proyecto of proyectosVisibles; track proyecto.id) {
             <div class="proyecto-card">
                 <div class="card-inner">
-                    
+                    <!-- CARA FRONTAL -->
                     <div class="card-front">
                         <div class="proyecto-img-container">
                             <img [src]="proyecto.imagenUrl" [alt]="proyecto.titulo" class="proyecto-img">
                         </div>
                         <div class="proyecto-info-front">
                             <h3>{{ proyecto.titulo }}</h3>
-                            
                             <div class="proyecto-tech-stack">
                                 @for (tech of proyecto.tecnologias; track tech.nombre) {
                                     <img [src]="tech.iconoUrl" [alt]="tech.nombre" [title]="tech.nombre" class="mini-tech-icon">
@@ -23,31 +21,32 @@
                         </div>
                     </div>
                     
+                    <!-- CARA TRASERA -->
                     <div class="card-back">
                         <h3>{{ proyecto.titulo }}</h3>
                         <p class="proyecto-desc">{{ proyecto.descripcion }}</p>
-                        
                         <div class="proyecto-links">
                             <a *ngIf="proyecto.linkProyecto" [href]="proyecto.linkProyecto" target="_blank" class="btn-solid">
                                 <i class='bx bx-link-external'></i> Visitar
                             </a>
                         </div>
                     </div>
-
                 </div>
             </div>
-            }
+        }
     </div>
 
+    <!-- BOTÓN DINÁMICO -->
     <button class="btn-ver-mas-neon" (click)="abrirModalProyectos()">
-        <span>Ver Más Proyectos</span>
+        <span>{{ isMobile ? 'Ver Todos los Proyectos' : 'Ver Más Proyectos' }}</span>
         <i class='bx bx-plus'></i>
     </button>
 </section>
 
+<!-- MODAL CON PROYECTOS RESTANTES -->
 @if (modalAbierto) {
     <app-all-projects-modal 
-        [todosLosProyectos]="listaProyectos.slice(3)" 
+        [todosLosProyectos]="proyectosParaModal" 
         (cerrarModalEvent)="cerrarModalProyectos()">
     </app-all-projects-modal>
 }

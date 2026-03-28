@@ -2,43 +2,47 @@
     <h2 class="heading">Sobre <span>Mí</span></h2>
 
     <div class="about-container">
-
-
-    
-
+        <!-- LADO IZQUIERDO: AVATAR OCTOGONAL -->
         <div class="octagon-container">
-        <div class="octagon-border">
-            <video 
-                #videoPlayer
-                autoplay 
-                loop 
-                muted 
-                playsinline 
-                [muted]="true"
-                class="octagon-image">
-                <source src="assets/victorCupa.mp4" type="video/mp4">
-            </video>
-            
-            <div class="scanline-effect"></div>
+            <div class="octagon-border">
+                <video 
+                    #videoPlayer
+                    autoplay 
+                    loop 
+                    muted
+                    [muted]="true"
+                    playsinline
+                    preload="auto"
+                    class="octagon-image">
+                    <source src="assets/victorCupa.mp4" type="video/mp4">
+                    Tu navegador no soporta videos.
+                </video>
+                <div class="scanline-effect"></div>
+            </div>
         </div>
-    </div>
 
-
-
+        <!-- LADO DERECHO: CONTENIDO -->
         <div class="about-content">
-            <h3>Ingeniero de Sistemas & Desarrollador Web</h3>
+            <h3>Ingeniero de Sistemas & <br> Arquitecto de Software</h3>
             
             <p class="typing-area">
                 <span #textoDictado></span>
             </p>
 
-            <div class="audio-wave">
-                <div class="bar"></div><div class="bar"></div><div class="bar"></div>
-                <div class="bar"></div><div class="bar"></div><div class="bar"></div>
-                <div class="bar"></div>
+            <div class="status-box">
+                <div class="audio-wave">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <span class="status-text">SISTEMA LISTO</span>
             </div>
 
-            <a href="#" class="btn-cv">Descargar CV</a>
+            <a href="assets/tu-cv.pdf" download class="btn-cv">
+                <i class='bx bx-download'></i> Descargar CV
+            </a>
         </div>
     </div>
 </section>

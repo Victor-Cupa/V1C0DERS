@@ -194,13 +194,23 @@
 }
 
 /* --------------------------------------------------------------------------
-   6. RESPONSIVE Y ACCESIBILIDAD (A11Y)
+   6. RESPONSIVE Y ACCESIBILIDAD (A11Y) - OPTIMIZADO
    -------------------------------------------------------------------------- */
 @media (max-width: 991px) {
+    /* CORRECCIÓN CRÍTICA: Cambiar height de 100vh a auto para móviles */
+    .about {
+        height: auto; 
+        min-height: 100vh; /* Opcional, para asegurar el mínimo de pantalla */
+        max-height: none;
+        padding-top: 12rem; /* Espacio para el navbar fijo en móvil */
+        overflow: visible;
+    }
+
     .about-container {
         flex-direction: column; 
         text-align: center;
-        gap: 3rem;
+        gap: 4rem;
+        margin-top: 0;
     }
 
     .about-content {
@@ -208,27 +218,17 @@
         text-align: center;
     }
 
+    /* Como el texto es fijo, reducimos la min-height */
     .typing-area {
-        min-height: 18rem; 
+        min-height: auto; 
+        font-size: 1.6rem;
+        color: #fff; /* Aseguramos color visible */
     }
 
+    /* Ajuste para que el video (octágono) sea protagonista en móvil */
     .octagon-container {
-        width: 60vw; 
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .octagon-container {
-        animation: none !important;
-        filter: drop-shadow(0 0 1rem rgba(0, 238, 255, 0.5)) !important;
-    }
-    
-    .scanline-effect {
-        display: none !important; 
-    }
-    
-    .bar {
-        animation: none !important; 
-        transform: scaleY(0.5) !important; 
+        width: 70vw; 
+        max-width: 350px;
+        filter: drop-shadow(0 0 2rem rgba(0, 238, 255, 0.4));
     }
 }

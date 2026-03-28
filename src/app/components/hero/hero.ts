@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import Typed from 'typed.js';
 
 @Component({
@@ -7,16 +8,29 @@ import Typed from 'typed.js';
   templateUrl: './hero.html',
   styleUrl: './hero.css'
 })
-export class Hero implements OnInit {
-  ngOnInit(): void {
-    const options = {
-      strings: ['Desarrollador de Software', 'Ingeniero de Sistemas', 'Especialista Pop!_OS'],
-      typeSpeed: 100,
-      backSpeed: 100,
-      backDelay: 1000,
-      loop: true
-    };
+export class Hero implements OnInit, OnDestroy {
+  private platformId = inject(PLATFORM_ID);
+  private typed: Typed | null = null;
 
-    const typed = new Typed('.multiple-text', options);
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.initTyped();
+    }
+  }
+
+  private initTyped(): void {
+    this.typed = new Typed('.multiple-text', {
+      strings: [
+
+      ],
+      typeSpeed: 60,
+      backSpeed: 40,
+      backDelay: 2000,
+      loop: true
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.typed) this.typed.destroy();
   }
 }

@@ -35,14 +35,17 @@
     align-items: center;
     text-align: center;
     width: 100%;
-    padding: 6rem 9%;
+    /* El padding lateral se ajusta solo: 5% en pantallas chicas, hasta 12% en grandes */
+    padding: 8rem clamp(5%, 8vw, 12%); 
+    box-sizing: border-box;
 }
 
 .portafolio-subtitle {
-    font-size: 1.6rem;
+    /* Fuente que escala sola entre 1.4rem y 1.6rem */
+    font-size: clamp(1.4rem, 1.5vw, 1.6rem);
     color: var(--texto-secundario);
-    margin-bottom: 4rem;
-    max-width: 650px;
+    margin-bottom: 5rem;
+    max-width: 800px; /* Un poco más ancho para pantallas grandes */
     line-height: 1.6;
 }
 
@@ -51,18 +54,26 @@
    ========================================================================== */
 .proyectos-grid {
     display: grid;
-    /* Crea columnas automáticas de mínimo 320px */
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 3rem;
+    /** 
+     * AUTO-FILL: Crea tantas columnas como quepan.
+     * MINMAX: La card nunca mide menos de 350px, pero se expande si sobra espacio.
+     */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 400px));
+    justify-content: center; /* Centra las cards si no llenan toda la fila */
+    gap: clamp(2rem, 4vw, 4rem); /* El espacio entre cards crece con la pantalla */
     width: 100%;
-    max-width: 1200px;
+    /* Aumentamos el tope para que en monitores 4K no se vea como un cuadrado pequeño */
+    width: 100%;
+    max-width: 1400px; 
+    margin: 0 auto;
 }
 
 /* ==========================================================================
    TARJETAS 3D FLIP PARA PROYECTOS
    ========================================================================== */
 .proyecto-card {
-    height: 420px; /* Altura fija para que la cuadrícula sea perfecta */
+    /* La altura se ajusta levemente según el ancho de la pantalla */
+    height: clamp(420px, 30vw, 480px); 
     perspective: 1000px; 
     background: transparent; 
 }
@@ -235,8 +246,8 @@
    BOTÓN "VER MÁS PROYECTOS" (Estilo Neón Jarvis)
    ========================================================================== */
 .btn-ver-mas-neon {
-    margin-top: 4rem; /* Le da espacio para respirar debajo de la cuadrícula */
-    padding: 1.2rem 3rem;
+    margin-top: clamp(4rem, 6vh, 8rem);
+    padding: 1.2rem 4rem;
     background: transparent;
     color: var(--color-principal);
     border: 2px solid var(--color-principal);
@@ -255,7 +266,7 @@
 
 /* Efecto Hover: Se llena de cian y el texto pasa a oscuro */
 .btn-ver-mas-neon:hover {
-    background: var(--color-principal);
+    
     color: var(--fondo-oscuro);
     box-shadow: 0 0 20px rgba(20, 255, 236, 0.4);
     transform: translateY(-3px);

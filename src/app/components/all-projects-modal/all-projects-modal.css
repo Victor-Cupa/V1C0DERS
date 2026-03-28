@@ -1,173 +1,218 @@
 /* ==========================================================================
-   MODAL DE PROYECTOS (Aesthetic Jarvis)
+   1. RESET Y CONFIGURACIÓN GLOBAL DEL MODAL
    ========================================================================== */
 .modal-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85); /* Fondo oscuro profundo */
-    backdrop-filter: blur(5px); /* Desenfoque sutil */
-    z-index: 2000; /* Siempre encima */
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
     display: flex;
     justify-content: center;
     align-items: center;
-    opacity: 1;
-    transition: all 0.3s ease;
+    box-sizing: border-box; /* Asegura que el padding no sume al ancho */
 }
 
 .modal-content {
     width: 90%;
-    max-width: 1300px;
-    height: 80vh;
+    max-width: 1200px;
+    height: 85vh;
+    background: rgba(11, 15, 25, 0.98);
+    border: 2px solid #00eeff;
     border-radius: 1.5rem;
-    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 238, 255, 0.2);
     display: flex;
     flex-direction: column;
-    
-    /* Efecto Glassmorphism Neón */
-    background: rgba(255, 255, 255, 0.03);
-    border: 2px solid var(--color-principal); /* Borde neón cian */
-    box-shadow: 0 0 30px rgba(20, 255, 236, 0.3); 
-    backdrop-filter: blur(15px);
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
 }
 
 /* ==========================================================================
-   HEADER Y CUERPO
+   2. HEADER (TÍTULO Y CIERRE)
    ========================================================================== */
 .modal-header {
-    padding: 2.5rem;
+    padding: 1.5rem 2.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(0, 238, 255, 0.1);
+    flex-shrink: 0; /* Evita que el header se comprima */
 }
 
 .modal-header h3 {
-    font-family: var(--fuente-titulos);
-    font-size: 2rem;
-    color: var(--texto-principal);
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
 }
+
+.modal-header h3 span { color: #00eeff; }
 
 .close-btn {
     background: transparent;
     border: none;
-    color: var(--color-principal);
+    color: #00eeff;
     font-size: 3rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: 0.3s ease;
+    display: flex;
+    align-items: center;
 }
 
-.close-btn:hover {
-    color: #ff3366; /* Un rojo neón al hover para cerrar */
-    transform: rotate(90deg);
-}
+.close-btn:hover { color: #ff3366; transform: rotate(90deg); }
 
-/* El cuerpo tiene scroll propio */
+/* ==========================================================================
+   3. CUERPO Y GRID (ESCRITORIO)
+   ========================================================================== */
 .modal-body {
     flex: 1;
     overflow-y: auto;
-    padding: 3rem;
-    /* Estilizamos la barra de scroll para que combine */
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-principal) transparent;
+    padding: 2.5rem;
+    box-sizing: border-box;
 }
 
-/* ==========================================================================
-   CUADRÍCULA INTERNA (Grid)
-   ========================================================================== */
 .proyectos-modal-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 3rem;
+    /* Grid automático para escritorio */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    width: 100%;
 }
 
-/* Reutilizamos el estilo de tarjeta holográfica */
+.scroll-indicator { display: none; }
+
+/* ==========================================================================
+   4. TARJETAS (ESTILO JARVIS)
+   ========================================================================== */
 .proyecto-modal-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
     display: flex;
     flex-direction: column;
-    border-radius: 1rem;
+    height: 100%;
+    transition: 0.3s ease;
+    box-sizing: border-box;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Asegúrate de reutilizar tus mini-iconos contextuales coloridos */
-.mini-icon-color {
-    width: 20px; /* Mini */
-    height: 20px;
-}
-/* ==========================================================================
-   ESTILOS INTERNOS DE LA TARJETA DEL MODAL
-   ========================================================================== */
-
-/* 1. Contenedor de la Imagen */
 .proyecto-modal-img {
     width: 100%;
-    height: 180px; /* Altura estricta para que todas las tarjetas sean uniformes */
-    background: var(--segundo-fondo);
-    overflow: hidden;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    height: 180px;
+    flex-shrink: 0;
 }
 
-/* 2. La Imagen en sí */
 .proyecto-modal-img img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* CRÍTICO: Recorta la imagen proporcionalmente sin deformarla */
-    transition: transform 0.4s ease;
+    object-fit: cover;
 }
 
-/* Efecto hover suave en la imagen */
-.proyecto-modal-card:hover .proyecto-modal-img img {
-    transform: scale(1.05);
-}
-
-/* 3. Contenedor de la Información (Textos y Logos) */
 .proyecto-modal-info {
-    padding: 2rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    flex: 1; /* Obliga a la tarjeta a estirarse si hay menos texto */
+    flex: 1;
+    width: 100%; /* IMPORTANTE: Asegura que no se desborde */
+    box-sizing: border-box;
 }
 
-/* Título del proyecto en el modal */
 .proyecto-modal-info h4 {
-    font-family: var(--fuente-titulos);
     font-size: 1.6rem;
-    color: var(--texto-principal);
-    margin: 0;
+    color: #fff;
+    margin-bottom: 0.8rem;
+    font-family: 'Orbitron', sans-serif;
 }
 
-/* Descripción */
 .proyecto-modal-info p {
     font-size: 1.3rem;
-    color: var(--texto-secundario);
+    color: #ccc;
     line-height: 1.5;
-    margin: 0;
-    margin-bottom: 1rem; /* Separa el texto de los logos */
-    flex: 1; /* Empuja los logos siempre hacia abajo */
+    margin-bottom: 1.5rem;
+    flex: 1;
 }
 
-/* 4. Mini Stack Tecnológico en el Modal */
-.mini-tech-stack {
+/* ==========================================================================
+   5. FOOTER DE LA TARJETA
+   ========================================================================== */
+.modal-footer {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Línea separadora sutil */
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 238, 255, 0.1);
 }
 
-.mini-icon-color {
-    width: 24px; /* Tamaño controlado */
-    height: 24px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2));
-    transition: transform 0.3s ease;
+.mini-tech-stack { display: flex; gap: 0.8rem; }
+.mini-icon-color { width: 22px; height: 22px; object-fit: contain; }
+
+.btn-visitar-modal {
+    padding: 0.6rem 1.4rem;
+    background: #00eeff;
+    color: #0b0f19;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
 }
 
-.mini-icon-color:hover {
-    transform: translateY(-3px) scale(1.1);
+/* ==========================================================================
+   6. RESPONSIVO: MODO CARRUSEL (MÓVIL)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .modal-content {
+        height: 90vh;
+        width: 94%;
+    }
+
+    .modal-body {
+        padding: 1rem;
+        /* Permitimos que el scroll horizontal ocurra solo en la grid */
+        overflow-x: hidden; 
+    }
+
+    /* Transformamos el Grid en un Carrusel horizontal real */
+    .proyectos-modal-grid {
+        display: flex; 
+        flex-direction: row;
+        grid-template-columns: none; /* Desactivamos el grid */
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 2.5rem;
+        padding-bottom: 1rem;
+        width: 100%;
+        scrollbar-width: none;
+    }
+
+    .proyectos-modal-grid::-webkit-scrollbar { display: none; }
+
+    .proyecto-modal-card {
+        /* FIX: Esto evita que la tarjeta mida $1029px$ */
+        min-width: 85%; 
+        max-width: 85%;
+        flex: 0 0 85%; 
+        scroll-snap-align: center;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+
+    .btn-visitar-modal { width: 100%; text-align: center; }
+
+    .scroll-indicator {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        color: #00eeff;
+        font-size: 1.1rem;
+        margin-top: 1rem;
+        opacity: 0.7;
+    }
 }
