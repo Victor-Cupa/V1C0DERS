@@ -113,7 +113,7 @@ export class Portafolio implements OnInit {
     this.isMobile = window.innerWidth <= 768;
   }
 
-  // GETTERS DINÁMICOS: La clave de tu solicitud
+  // GETTERS DINÁMICOS
   get proyectosVisibles() {
     // Si es móvil muestra solo 1, si es desktop muestra 3
     return this.isMobile ? this.listaProyectos.slice(0, 1) : this.listaProyectos.slice(0, 3);
@@ -124,6 +124,18 @@ export class Portafolio implements OnInit {
     return this.isMobile ? this.listaProyectos.slice(1) : this.listaProyectos.slice(3);
   }
 
-  abrirModalProyectos() { this.modalAbierto = true; }
-  cerrarModalProyectos() { this.modalAbierto = false; }
+  // MÉTODOS DE CONTROL DE MODAL CON BLOQUEO DE SCROLL
+  abrirModalProyectos() { 
+    this.modalAbierto = true; 
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.style.overflow = 'hidden'; 
+    }
+  }
+
+  cerrarModalProyectos() { 
+    this.modalAbierto = false; 
+    if (isPlatformBrowser(this.platformId)) {
+      document.body.style.overflow = 'auto'; 
+    }
+  }
 }

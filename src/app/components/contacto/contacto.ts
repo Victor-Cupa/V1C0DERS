@@ -11,28 +11,30 @@ import { CommonModule } from '@angular/common';
 export class Contacto {
   email: string = 'victor.cupa587@gmail.com'; 
 
-  // Variables de estado
+  // Estados de carga y respuesta
   enviando: boolean = false;
   mensajeEnviado: boolean = false;
+  errorEnvio: boolean = false;
 
   public async enviarCorreo(e: Event) {
-    e.preventDefault(); 
+    e.preventDefault();
     this.enviando = true;
+    this.mensajeEnviado = false;
+    this.errorEnvio = false;
 
-    // 1. Capturamos el formulario de tu HTML
     const form = e.target as HTMLFormElement;
     const formData = new FormData(form);
 
-    // 2. Lo convertimos en un objeto JSON limpio
+    // Mapeo de datos (incluye el campo hp_field para seguridad)
     const data = {
       user_name: formData.get('user_name'),
       user_email: formData.get('user_email'),
       subject: formData.get('subject'),
-      message: formData.get('message')
+      message: formData.get('message'),
+      hp_field: formData.get('hp_field') // Trampa para bots
     };
 
     try {
-      // 3. ¡LA MAGIA SERVERLESS! Llamamos a tu propia API en lugar de a EmailJS
       const response = await fetch('/.netlify/functions/enviar-correo', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -40,17 +42,22 @@ export class Contacto {
       });
 
       if (response.ok) {
-        this.enviando = false;
         this.mensajeEnviado = true;
-        form.reset();
-        setTimeout(() => this.mensajeEnviado = false, 5000);
+        form.reset(); // Limpia los campos tras el éxito
       } else {
-        throw new Error('Error en el servidor');
+        this.errorEnvio = true;
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error de red:', error);
+      this.errorEnvio = true;
+    } finally {
       this.enviando = false;
-      alert('Hubo un error al enviar el mensaje. Intenta de nuevo.');
+      
+      // Auto-ocultar notificaciones tras 6 segundos
+      setTimeout(() => {
+        this.mensajeEnviado = false;
+        this.errorEnvio = false;
+      }, 6000);
     }
   }
 }

@@ -1,0 +1,18 @@
+[build]
+  # Esta es la ruta donde Angular genera los archivos tras el build
+  # Ajusta 'portafolio-web' al nombre de tu proyecto en angular.json
+  publish = "dist/portafolio-web/browser"
+  command = "npm run build"
+
+[dev]
+  # Puerto donde corre Netlify Dev
+  port = 8888
+  # Comando para levantar Angular en modo desarrollo
+  command = "npm start"
+  # Indica a Netlify que debe esperar a que el puerto de Angular (4200) esté listo
+  targetPort = 4200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

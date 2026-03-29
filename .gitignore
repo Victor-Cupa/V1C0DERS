@@ -45,3 +45,32 @@ Thumbs.db
 
 # Local Netlify folder
 .netlify
+# Security & Secrets
+.env
+.env.local
+.env.production
+*.pem
+
+
+# Python (Entornos y Caché)
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+# ---------------------------------------------------------
+# AJUSTES ADICIONALES PARA VICTOR CUPA (SEGURIDAD Y PYTHON)
+# ---------------------------------------------------------
+
+# Ignorar variables de entorno (Claves de EmailJS)
+.env
+.env.local
+
+# Ignorar entornos virtuales de Python y caché
+venv/
+.venv/
+__pycache__/
+
+# Logs de Netlify y funciones locales
+.netlify/

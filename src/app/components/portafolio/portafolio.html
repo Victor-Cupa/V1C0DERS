@@ -44,9 +44,23 @@
 </section>
 
 <!-- MODAL CON PROYECTOS RESTANTES -->
-@if (modalAbierto) {
-    <app-all-projects-modal 
-        [todosLosProyectos]="proyectosParaModal" 
-        (cerrarModalEvent)="cerrarModalProyectos()">
-    </app-all-projects-modal>
+@defer (when modalAbierto; prefetch on idle) {
+    <!-- El @if se encarga de mostrar/ocultar el componente -->
+    @if (modalAbierto) {
+        <app-all-projects-modal 
+            [todosLosProyectos]="proyectosParaModal" 
+            (cerrarModalEvent)="cerrarModalProyectos()">
+        </app-all-projects-modal>
+    }
+} 
+@loading (after 100ms; minimum 500ms) {
+    <div class="loading-overlay">
+        <div class="spinner-neon"></div>
+    </div>
+} 
+@placeholder {
+    <!-- Espacio vacío mientras no se abre -->
+} 
+@error {
+    <p class="status-msg error">Error al cargar el archivo de proyectos.</p>
 }

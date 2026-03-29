@@ -229,7 +229,30 @@
     color: var(--color-principal);
     box-shadow: 0 0 15px var(--color-principal);
 }
+.loading-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(11, 15, 25, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2500;
+}
 
+.spinner-neon {
+    width: 50px;
+    height: 50px;
+    border: 3px solid transparent;
+    border-top-color: #00eeff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    box-shadow: 0 0 15px #00eeff;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
 /* ==========================================================================
    EFECTOS HOVER GLOBALES
    ========================================================================== */

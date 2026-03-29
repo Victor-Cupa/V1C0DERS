@@ -2,13 +2,14 @@
     <h2 class="heading">Contácta<span>me</span></h2>
 
     <div class="contact-container">
+        <!-- Columna de Información -->
         <div class="contact-info">
             <h3>¡Hablemos de tu próximo proyecto!</h3>
             <p>Trabajo en desarrollo de software y tecnología construyendo soluciones modernas y eficientes. Si tienes un reto, escríbeme.</p>
             
             <div class="info-item">
                 <i class='bx bx-envelope'></i>
-                <a href="mailto:{{ email }}" class="email-link">{{ email }}</a>
+                <a [href]="'mailto:' + email" class="email-link">{{ email }}</a>
             </div>
             <div class="info-item">
                 <i class='bx bx-globe'></i>
@@ -16,11 +17,20 @@
             </div>
         </div>
 
+        <!-- Columna del Formulario -->
         <form (submit)="enviarCorreo($event)" class="contact-form">
             <div class="input-stack">
-                <input type="text" name="user_name" placeholder="Nombre Completo" required>
-                <input type="email" name="user_email" placeholder="Correo Electrónico" required>
+                <!-- Honeypot: Trampa invisible para bots -->
+                <input type="text" name="hp_field" class="hp-hidden" tabindex="-1" autocomplete="off">
+                
+                <input type="text" name="user_name" placeholder="Nombre Completo" 
+                       autocomplete="name" required>
+                
+                <input type="email" name="user_email" placeholder="Correo Electrónico" 
+                       autocomplete="email" required>
+                
                 <input type="text" name="subject" placeholder="Asunto del Mensaje" required>
+                
                 <textarea name="message" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
             </div>
             
@@ -30,11 +40,22 @@
                 </button>
             </div>
 
-            @if (mensajeEnviado) {
-                <p style="color: #00eeff; margin-top: 1.5rem; text-align: right; font-size: 1.4rem; font-family: 'Poppins', sans-serif;">
-                    ¡Mensaje enviado con éxito! Hablaremos pronto.
-                </p>
-            }
+            <!-- Notificaciones Dinámicas (Neón Jarvis) -->
+            <div class="status-container">
+                @if (mensajeEnviado) {
+                    <div class="status-msg success">
+                        <i class='bx bx-check-circle'></i>
+                        <span>¡Mensaje enviado con éxito! Hablaremos pronto.</span>
+                    </div>
+                }
+
+                @if (errorEnvio) {
+                    <div class="status-msg error">
+                        <i class='bx bx-error-circle'></i>
+                        <span>Hubo un problema. Por favor, intenta de nuevo.</span>
+                    </div>
+                }
+            </div>
         </form>
     </div>
 </section>
