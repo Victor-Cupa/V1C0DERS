@@ -1,12 +1,24 @@
 <app-navbar></app-navbar>
-<router-outlet></router-outlet>
+<app-navbar></app-navbar>
+
+<main>
+  <router-outlet></router-outlet> 
+</main>
+
 <app-footer></app-footer>
 
 <div class="floating-controls">
-    <a href="#inicio" class="scroll-top">
+    <!-- Agregamos aria-label para que Lighthouse nos de el 100 -->
+    <a href="#inicio" class="scroll-top" aria-label="Volver al inicio de la página">
         <i class='bx bx-up-arrow-alt'></i>
     </a>
-    <a href="https://wa.me/573134662785" target="_blank" class="whatsapp-btn">
+    
+    <!-- Agregamos aria-label y rel="noopener" por seguridad -->
+    <a href="https://wa.me/573134662785" 
+       target="_blank" 
+       rel="noopener"
+       class="whatsapp-btn" 
+       aria-label="Contactar por WhatsApp">
         <i class='bx bxl-whatsapp'></i>
     </a>
 </div>
