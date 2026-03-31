@@ -116,7 +116,83 @@
     font-family: 'Poppins', sans-serif;
     transition: .3s ease;
 }
+/* Estilos para la Tarjeta de Estado */
+.status-card {
+  background-color: rgba(0, 0, 0, 0.3); /* Fondo oscuro cyberpunk */
+  border: 1px solid var(--neon-cyan); /* Bordes neón */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0, 238, 255, 0.2);
+  margin-top: 30px;
+}
 
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.status-item:last-child {
+  margin-bottom: 0;
+}
+
+.status-item i {
+  font-size: 1.8rem;
+  color: var(--neon-cyan);
+}
+
+.text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.value {
+  font-family: 'Orbitron', sans-serif; /* Tu fuente principal */
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.value.active { color: #00ff88; } /* Verde para Disponible */
+.value.timed { color: #fff; }    /* Blanco para Tiempo */
+
+/* --- Animación del Pulso Neón --- */
+.led-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+}
+
+.led-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #00ff88; /* Verde base */
+  border-radius: 50%;
+  position: relative;
+}
+
+.led-dot::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #00ff88;
+  animation: pulseNeon 1.5s infinite alternate;
+}
+
+@keyframes pulseNeon {
+  0% { transform: scale(1); opacity: 0.8; box-shadow: 0 0 10px #00ff88; }
+  100% { transform: scale(1.5); opacity: 0.2; box-shadow: 0 0 20px #00ff88, 0 0 30px #00ff88; }
+}
 /* Control maestro del área de texto */
 .input-stack textarea {
     /* La altura máxima será el 15% de la pantalla, pero nunca menos de 8rem */
@@ -155,6 +231,101 @@
 .btn:hover {
     background: #fff;
     box-shadow: none;
+}
+
+/* --- COLUMNA DE INFORMACIÓN --- */
+.cyber-title {
+    font-size: 2.6rem;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 1.5vh;
+    line-height: 1.2;
+}
+
+.cyber-description {
+    font-size: 1.45rem;
+    color: #cbd5e1; /* Gris claro nítido */
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.7; /* Interlineado para mejor lectura */
+    margin-bottom: 3vh;
+}
+
+/* --- DASHBOARD DE ESTADO (PANEL TÉCNICO) --- */
+.status-dashboard {
+    padding: 1.5rem 2rem;
+    border-radius: 0 12px 12px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem; /* Espaciado entre items */
+    margin-top: 2vh;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Forzado de color y brillo en Iconos */
+.status-icon i {
+    font-size: 2.2rem !important;
+    color: #00eeff !important; 
+    filter: drop-shadow(0 0 5px rgba(0, 238, 255, 0.4));
+}
+
+.status-label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: #94a3b8; /* Gris azulado para etiquetas */
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.status-value {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* Colores de Valor */
+.text-active { color: #00ff88; } /* Verde Neón */
+.text-white { color: #fff; }
+
+/* Animación LED de Estado Online */
+.led-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #00ff88;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 10px #00ff88;
+}
+
+.led-dot::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #00ff88;
+    animation: pulseNeon 1.5s infinite alternate;
+}
+
+@keyframes pulseNeon {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1.6);
+        opacity: 0;
+        box-shadow: 0 0 15px #00ff88;
+    }
 }
 
 /* ==========================================================================

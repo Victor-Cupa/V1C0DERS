@@ -1,28 +1,28 @@
-exports.handler = async function(event, context) {
-  // 1. Filtro de método
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
+exports.handler = async (event) => {
+  // 1. Filtro de método HTTP
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method Not Allowed" };
   }
 
   try {
-    // 2. Un solo parseo para todo
-    const body = JSON.parse(event.body);
-    const { user_name, user_email, subject, message, hp_field } = body;
+    // 2. Un solo parseo para todo el body
+    const data = JSON.parse(event.body);
+    const { user_name, user_email, subject, message, hp_field } = data;
 
-    // 3. --- FILTRO HONEYPOT (Consolidado) ---
-    // Si hp_field tiene algo, es un bot.
+    // 3. Filtro Honeypot (Seguridad Anti-Bot)
     if (hp_field && hp_field.length > 0) {
       console.warn('Spam detectado vía Honeypot');
-      // Engañamos al bot con un 200, pero no enviamos nada
+      // Engañamos al bot con un 200, pero cortamos la ejecución aquí
       return { 
         statusCode: 200, 
         body: JSON.stringify({ message: 'Procesado correctamente' }) 
       };
     }
 
-    // 4. Validación de seguridad básica
-    if (!user_email || !user_email.includes('@')) {
-      return { statusCode: 400, body: 'Email inválido' };
+    // 4. Validación de Integridad de Datos
+    // Evitamos correos sin @ o mensajes excesivamente largos que consuman recursos
+    if (!user_email || !user_email.includes('@') || (message && message.length > 2000)) {
+      return { statusCode: 422, body: "Invalid data" };
     }
 
     // 5. Preparación del envío a EmailJS
@@ -35,12 +35,12 @@ exports.handler = async function(event, context) {
         user_name,
         user_email,
         subject,
-        // Sanitización para evitar inyección de HTML
+        // Sanitización estricta para evitar inyección de HTML en tu bandeja de entrada
         message: message ? message.replace(/<[^>]*>?/gm, '') : ''
       }
     };
 
-    // 6. Petición oculta a la API
+    // 6. Petición a la API de EmailJS
     const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

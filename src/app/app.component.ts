@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { RouterOutlet} from '@angular/router';
 import { Navbar } from './components/navbar/navbar';
 import { Footer } from './components/footer/footer';
 
@@ -12,7 +12,6 @@ import { Footer } from './components/footer/footer';
   imports: [
     CommonModule, 
     RouterOutlet, 
-    RouterLink,
     Navbar,
     Footer
   ],

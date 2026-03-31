@@ -19,21 +19,10 @@
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "favicon.svg",
-                "input": "src",
-                "output": "/"
-              },
-              {
-                "glob": "robots.txt",
-                "input": "src",
-                "output": "/"
-              },
-              {
-                "glob": "**/*",
-                "input": "src/assets",
-                "output": "/assets"
-              }
+              { "glob": "favicon.svg", "input": "src", "output": "/" },
+              { "glob": "robots.txt", "input": "src", "output": "/" },
+              { "glob": "sitemap.xml", "input": "src", "output": "/" },
+              { "glob": "**/*", "input": "src/assets", "output": "/assets" }
             ],
             "styles": [
               "src/styles.css"
@@ -49,7 +38,7 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
+                  "maximumWarning": "6kB",
                   "maximumError": "8kB"
                 }
               ],

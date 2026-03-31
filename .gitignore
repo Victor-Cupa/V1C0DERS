@@ -1,17 +1,51 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
-# Compiled output
+# ---------------------------------------------------------
+# 1. COMPILED OUTPUT & CACHE
+# ---------------------------------------------------------
 /dist
 /tmp
 /out-tsc
 /bazel-out
+/.angular/cache
+.sass-cache/
+/coverage
 
-# Node
+# ---------------------------------------------------------
+# 2. DEPENDENCIES (NODE & PYTHON)
+# ---------------------------------------------------------
 /node_modules
-npm-debug.log
-yarn-error.log
+venv/
+.venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
 
-# IDEs and editors
+# ---------------------------------------------------------
+# 3. SECURITY & SECRETS (CRÍTICO)
+# ---------------------------------------------------------
+.env
+.env.local
+.env.production
+*.pem
+
+# ---------------------------------------------------------
+# 4. SERVERLESS & NETLIFY
+# ---------------------------------------------------------
+.netlify/
+
+# ---------------------------------------------------------
+# 5. LOGS
+# ---------------------------------------------------------
+npm-debug.log*
+yarn-error.log
+/libpeerconnection.log
+testem.log
+
+# ---------------------------------------------------------
+# 6. IDEs & EDITORS
+# ---------------------------------------------------------
 .idea/
 .project
 .classpath
@@ -19,58 +53,21 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
+.history/*
 
-# Visual Studio Code
+# Visual Studio Code (Excepciones específicas)
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/mcp.json
-.history/*
 
-# Miscellaneous
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
-__screenshots__/
-
-# System files
+# ---------------------------------------------------------
+# 7. OS SYSTEM FILES & MISC
+# ---------------------------------------------------------
 .DS_Store
 Thumbs.db
-
-# Local Netlify folder
-.netlify
-# Security & Secrets
-.env
-.env.local
-.env.production
-*.pem
-
-
-# Python (Entornos y Caché)
-venv/
-.venv/
-env/
-__pycache__/
-*.py[cod]
-*$py.class
-# ---------------------------------------------------------
-# AJUSTES ADICIONALES PARA VICTOR CUPA (SEGURIDAD Y PYTHON)
-# ---------------------------------------------------------
-
-# Ignorar variables de entorno (Claves de EmailJS)
-.env
-.env.local
-
-# Ignorar entornos virtuales de Python y caché
-venv/
-.venv/
-__pycache__/
-
-# Logs de Netlify y funciones locales
-.netlify/
+/connect.lock
+/typings
+__screenshots__/

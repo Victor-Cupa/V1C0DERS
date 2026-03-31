@@ -2,27 +2,51 @@
     <h2 class="heading">Contácta<span>me</span></h2>
 
     <div class="contact-container">
-        <!-- Columna de Información -->
+        <!-- Columna de Información (Refactorizada a Dashboard) -->
         <div class="contact-info">
-            <h3>¡Hablemos de tu próximo proyecto!</h3>
-            <p>Trabajo en desarrollo de software y tecnología construyendo soluciones modernas y eficientes. Si tienes un reto, escríbeme.</p>
-            
-            <div class="info-item">
-                <i class='bx bx-envelope'></i>
-                <a [href]="'mailto:' + email" class="email-link">{{ email }}</a>
-            </div>
-            <div class="info-item">
-                <i class='bx bx-globe'></i>
-                <span>Disponibilidad para proyectos remotos</span>
+            <h3 class="cyber-title">¡Hablemos de tu próximo proyecto!</h3>
+            <p class="cyber-description">
+                Como Ingeniero de Sistemas especializado en soluciones digitales y arquitecturas modernas, 
+                estoy listo para colaborar en tus desafíos más complejos mediante código eficiente y escalable.
+            </p>
+
+            <!-- Dashboard de Estado: Estética de Panel de Control -->
+            <div class="status-dashboard">
+                <div class="status-item">
+                    <div class="status-icon"><i class='bx bx-signal-5'></i></div>
+                    <div class="status-content">
+                        <span class="status-label">SYSTEM STATUS</span>
+                        <div class="status-value">
+                            <span class="led-dot"></span>
+                            <span class="text-active">ONLINE & DISPONIBLE</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="status-item">
+                    <div class="status-icon"><i class='bx bx-stopwatch'></i></div>
+                    <div class="status-content">
+                        <span class="status-label">RESPUESTA (SLA)</span>
+                        <span class="status-value text-white">&lt; 24 HORAS</span>
+                    </div>
+                </div>
+
+                <div class="status-item">
+                    <div class="status-icon"><i class='bx bx-globe'></i></div>
+                    <div class="status-content">
+                        <span class="status-label">UBICACIÓN</span>
+                        <span class="status-value text-white">UTC-5 - DISPONIBILIDAD GLOBAL</span>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Columna del Formulario -->
         <form (submit)="enviarCorreo($event)" class="contact-form">
+            <!-- Honeypot: Trampa invisible para bots -->
+            <input type="text" name="hp_field" class="hp-hidden" tabindex="-1" autocomplete="off">
+            
             <div class="input-stack">
-                <!-- Honeypot: Trampa invisible para bots -->
-                <input type="text" name="hp_field" class="hp-hidden" tabindex="-1" autocomplete="off">
-                
                 <input type="text" name="user_name" placeholder="Nombre Completo" 
                        autocomplete="name" required>
                 
@@ -40,11 +64,11 @@
                 </button>
             </div>
 
-            <!-- Notificaciones Dinámicas (Neón Jarvis) -->
+            <!-- Notificaciones Dinámicas -->
             <div class="status-container">
                 @if (mensajeEnviado) {
                     <div class="status-msg success">
-                        <i class='bx bx-check-circle'></i> <!-- Icono de Check -->
+                        <i class='bx bx-check-circle'></i>
                         <span>¡Mensaje enviado con éxito! Hablaremos pronto.</span>
                     </div>
                 }
