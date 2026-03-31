@@ -71,3 +71,9 @@ Thumbs.db
 /connect.lock
 /typings
 __screenshots__/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
